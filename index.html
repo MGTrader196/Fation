@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libasora | Modern Clothing Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-block">
+        <p class="eyebrow">Fashion House</p>
+        <a href="#home" class="brand">Libasora</a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#collection">Collection</a>
+        <a href="#how-to-add">Add Product</a>
+        <a href="#about">About</a>
+        <a href="#checkout">Checkout</a>
+      </nav>
+
+      <button class="cart-button" id="openCartButton" type="button">
+        Cart
+        <span id="cartCount">0</span>
+      </button>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Spring Summer 2026</p>
+          <h1>Style your store like a real fashion brand, not just a basic website.</h1>
+          <p class="hero-text">
+            Libasora now has a sharper visual identity, stronger product presentation, and a smoother shopping flow
+            so your clothing store feels modern, premium, and launch-ready.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="#collection">Explore Collection</a>
+            <a class="secondary-btn" href="#how-to-add">How To Add Product</a>
+          </div>
+
+          <div class="hero-mini-stats">
+            <article>
+              <strong>Premium UI</strong>
+              <span>Fashion-forward styling</span>
+            </article>
+            <article>
+              <strong>Easy Editing</strong>
+              <span>Products in one JS list</span>
+            </article>
+            <article>
+              <strong>Checkout Ready</strong>
+              <span>Cart, totals, payment section</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-badge">Fresh Drop</div>
+          <div class="hero-panel large-panel">
+            <p>Editorial Look</p>
+            <h2>Neutral tailoring with statement layering.</h2>
+          </div>
+          <div class="hero-panel small-panel">
+            <span>Best Seller</span>
+            <strong>New Arrivals Weekly</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="marquee-strip">
+        <div>
+          <span>Men Wear</span>
+          <span>Women Wear</span>
+          <span>Streetwear</span>
+          <span>Luxury Basics</span>
+          <span>Cash On Delivery</span>
+          <span>Fast Dispatch</span>
+        </div>
+      </section>
+
+      <section class="showcase-grid">
+        <article class="showcase-card dark">
+          <p class="eyebrow">Brand Mood</p>
+          <h2>Minimal cuts, rich tones, and high-contrast product focus.</h2>
+        </article>
+        <article class="showcase-card">
+          <p class="eyebrow">Store Features</p>
+          <ul class="feature-list">
+            <li>Add to cart with quantity control</li>
+            <li>Search and category filter</li>
+            <li>Payment and order summary</li>
+            <li>Responsive mobile layout</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="editor-note" id="how-to-add">
+        <div class="section-heading">
+          <p class="eyebrow">How To Add Your Product</p>
+          <h2>Aap apni products sirf `script.js` me add kar sakte ho.</h2>
+        </div>
+
+        <div class="editor-grid">
+          <article class="editor-card">
+            <h3>Step 1</h3>
+            <p>`script.js` ke start me `const products = [...]` wali list open karein.</p>
+          </article>
+          <article class="editor-card">
+            <h3>Step 2</h3>
+            <p>Har product ka `id`, `name`, `category`, `price`, `tag`, aur `image` replace ya add karein.</p>
+          </article>
+          <article class="editor-card">
+            <h3>Step 3</h3>
+            <p>Image ke liye online image URL use karein. Baad me local image path bhi laga sakte hain.</p>
+          </article>
+          <article class="editor-card sample-card">
+            <h3>Sample Product Format</h3>
+            <pre>{
+  id: 7,
+  name: "Classic Black Kurta",
+  category: "Men",
+  price: 49,
+  tag: "New",
+  image: "https://your-image-link.jpg"
+}</pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="collection" id="collection">
+        <div class="section-heading collection-heading">
+          <div>
+            <p class="eyebrow">Collection</p>
+            <h2>Pick a strong look for your store.</h2>
+          </div>
+          <div class="collection-controls">
+            <input type="search" id="searchInput" placeholder="Search product name">
+            <select id="categoryFilter">
+              <option value="All">All Categories</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="products" id="productGrid"></div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div>
+          <p class="eyebrow">About Libasora</p>
+          <h2>A bold clothing store concept with cleaner shopping and better brand feel.</h2>
+        </div>
+        <p>
+          Is version me styling ko zyada premium banaya gaya hai: stronger typography, better spacing, deeper color
+          palette, product filters, aur visible product editing guide. Aap isay apni real brand ke mutabiq aur bhi
+          customize kar sakte ho.
+        </p>
+      </section>
+
+      <section class="testimonials">
+        <div class="section-heading">
+          <p class="eyebrow">Customer Voice</p>
+          <h2>Store experience that feels more alive.</h2>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p>"Ab site zyada stylish aur branded lag rahi hai, bilkul fashion store jaisi."</p>
+            <span>Sana, Lahore</span>
+          </article>
+          <article class="testimonial-card accent">
+            <p>"Search aur filter ki wajah se products dekhna asaan ho gaya."</p>
+            <span>Hamza, Karachi</span>
+          </article>
+          <article class="testimonial-card">
+            <p>"Product add karne ka method bhi simple hai, bas JS list me item add karo."</p>
+            <span>Areeba, Islamabad</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="checkout-section" id="checkout">
+        <div class="section-heading">
+          <p class="eyebrow">Payment Section</p>
+          <h2>Complete your order</h2>
+        </div>
+
+        <div class="checkout-layout">
+          <form class="checkout-form" id="checkoutForm">
+            <div class="form-grid">
+              <label>
+                Full Name
+                <input type="text" name="name" placeholder="Enter full name" required>
+              </label>
+              <label>
+                Email Address
+                <input type="email" name="email" placeholder="Enter email address" required>
+              </label>
+              <label>
+                Phone Number
+                <input type="tel" name="phone" placeholder="03xx xxxxxxx" required>
+              </label>
+              <label>
+                City
+                <input type="text" name="city" placeholder="Your city" required>
+              </label>
+            </div>
+
+            <label>
+              Delivery Address
+              <textarea name="address" rows="4" placeholder="House no, street, area" required></textarea>
+            </label>
+
+            <fieldset class="payment-methods">
+              <legend>Select Payment Method</legend>
+              <label>
+                <input type="radio" name="payment" value="Cash on Delivery" checked>
+                Cash on Delivery
+              </label>
+              <label>
+                <input type="radio" name="payment" value="Debit / Credit Card">
+                Debit / Credit Card
+              </label>
+              <label>
+                <input type="radio" name="payment" value="Bank Transfer">
+                Bank Transfer
+              </label>
+            </fieldset>
+
+            <button class="primary-btn full-width" type="submit">Place Order</button>
+            <p class="form-message" id="formMessage"></p>
+          </form>
+
+          <aside class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="checkoutItems" class="checkout-items"></div>
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <strong id="checkoutSubtotal">$0</strong>
+            </div>
+            <div class="summary-line">
+              <span>Delivery</span>
+              <strong>$12</strong>
+            </div>
+            <div class="summary-line total">
+              <span>Total</span>
+              <strong id="checkoutTotal">$12</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="newsletter">
+        <div>
+          <p class="eyebrow">Stay Connected</p>
+          <h2>Join the latest drops and member-only offers.</h2>
+        </div>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email" required>
+          <button class="primary-btn" type="submit">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p class="brand">Libasora</p>
+        <p>Modern wear for every season and every statement.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#collection">Shop</a>
+        <a href="#how-to-add">Add Product</a>
+        <a href="#checkout">Payment</a>
+      </div>
+    </footer>
+  </div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartButton" type="button">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <a class="primary-btn full-width" href="#checkout" id="checkoutLink">Proceed to Checkout</a>
+    </div>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
