@@ -21,6 +21,7 @@
       </div>
 
       <nav class="main-nav">
+        <a href="#ai-match">AI Match</a>
         <a href="#collection">Collection</a>
         <a href="#how-to-add">Add Product</a>
         <a href="#about">About</a>
@@ -104,20 +105,91 @@
         </article>
       </section>
 
+      <section class="ai-match-section" id="ai-match">
+        <div class="section-heading">
+          <p class="eyebrow">AI Style Match</p>
+          <h2>Customer apni pic upload kare aur dekhe kis type ka outfit un par best lag sakta hai.</h2>
+        </div>
+
+        <div class="ai-layout">
+          <div class="ai-upload-card">
+            <h3>Upload Your Photo</h3>
+            <p class="ai-note">Yeh abhi demo version hai: photo preview aur smart style suggestion frontend par chal rahi hai.</p>
+
+            <label class="upload-box" for="photoUpload">
+              <input id="photoUpload" type="file" accept="image/*">
+              <span>Click karke apni photo upload karein</span>
+            </label>
+
+            <div class="preview-frame">
+              <img id="uploadedPreview" alt="Customer preview">
+              <p id="previewPlaceholder">Photo upload karne ke baad yahan preview nazar aayega.</p>
+            </div>
+          </div>
+
+          <div class="ai-controls-card">
+            <h3>Get Style Suggestion</h3>
+            <div class="ai-form-grid">
+              <label>
+                Choose Vibe
+                <select id="styleMood">
+                  <option value="Elegant">Elegant</option>
+                  <option value="Streetwear">Streetwear</option>
+                  <option value="Formal">Formal</option>
+                  <option value="Casual">Casual</option>
+                </select>
+              </label>
+              <label>
+                Select Fit
+                <select id="styleFit">
+                  <option value="Relaxed">Relaxed</option>
+                  <option value="Slim">Slim</option>
+                  <option value="Oversized">Oversized</option>
+                  <option value="Classic">Classic</option>
+                </select>
+              </label>
+              <label>
+                Preferred Tone
+                <select id="styleTone">
+                  <option value="Warm">Warm</option>
+                  <option value="Neutral">Neutral</option>
+                  <option value="Dark">Dark</option>
+                  <option value="Soft">Soft</option>
+                </select>
+              </label>
+            </div>
+
+            <button class="primary-btn" id="analyzeStyleButton" type="button">Analyze My Look</button>
+
+            <div class="ai-result-box">
+              <h4>Style Verdict</h4>
+              <p id="styleResultText">Photo upload aur options select karke suggestion hasil karein.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-recommendations">
+          <div class="section-heading compact">
+            <p class="eyebrow">Recommended For You</p>
+          </div>
+          <div class="match-grid" id="matchGrid"></div>
+        </div>
+      </section>
+
       <section class="editor-note" id="how-to-add">
         <div class="section-heading">
           <p class="eyebrow">How To Add Your Product</p>
-          <h2>Aap apni products sirf `script.js` me add kar sakte ho.</h2>
+          <h2>Aap apni products asani se product list me add kar sakte ho.</h2>
         </div>
 
         <div class="editor-grid">
           <article class="editor-card">
             <h3>Step 1</h3>
-            <p>`script.js` ke start me `const products = [...]` wali list open karein.</p>
+            <p>Product file ke start me products wali list open karein.</p>
           </article>
           <article class="editor-card">
             <h3>Step 2</h3>
-            <p>Har product ka `id`, `name`, `category`, `price`, `tag`, aur `image` replace ya add karein.</p>
+            <p>Har product ka naam, category, price, tag aur image update ya add karein.</p>
           </article>
           <article class="editor-card">
             <h3>Step 3</h3>
@@ -125,14 +197,11 @@
           </article>
           <article class="editor-card sample-card">
             <h3>Sample Product Format</h3>
-            <pre>{
-  id: 7,
-  name: "Classic Black Kurta",
-  category: "Men",
-  price: 49,
-  tag: "New",
-  image: "https://your-image-link.jpg"
-}</pre>
+            <pre>Product Name: Classic Black Kurta
+Category: Men
+Price: 49
+Tag: New
+Image: your-image-link.jpg</pre>
           </article>
         </div>
       </section>
@@ -245,15 +314,15 @@
             <div id="checkoutItems" class="checkout-items"></div>
             <div class="summary-line">
               <span>Subtotal</span>
-              <strong id="checkoutSubtotal">$0</strong>
+              <strong id="checkoutSubtotal">$0 / PKR 0</strong>
             </div>
             <div class="summary-line">
               <span>Delivery</span>
-              <strong>$12</strong>
+              <strong>$12 / PKR 3,350</strong>
             </div>
             <div class="summary-line total">
               <span>Total</span>
-              <strong id="checkoutTotal">$12</strong>
+              <strong id="checkoutTotal">$12 / PKR 3,350</strong>
             </div>
           </aside>
         </div>
@@ -277,6 +346,7 @@
         <p>Modern wear for every season and every statement.</p>
       </div>
       <div class="footer-links">
+        <a href="#ai-match">AI Match</a>
         <a href="#collection">Shop</a>
         <a href="#how-to-add">Add Product</a>
         <a href="#checkout">Payment</a>
@@ -293,7 +363,7 @@
     <div class="cart-footer">
       <div class="summary-line">
         <span>Subtotal</span>
-        <strong id="cartSubtotal">$0</strong>
+        <strong id="cartSubtotal">$0 / PKR 0</strong>
       </div>
       <a class="primary-btn full-width" href="#checkout" id="checkoutLink">Proceed to Checkout</a>
     </div>

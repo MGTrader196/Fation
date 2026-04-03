@@ -366,6 +366,143 @@ section { margin-top: 36px; }
   color: var(--muted);
 }
 
+.ai-match-section,
+.ai-upload-card,
+.ai-controls-card,
+.ai-result-box {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 30px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.ai-match-section {
+  padding: 28px;
+}
+
+.ai-layout,
+.match-grid {
+  display: grid;
+  gap: 22px;
+}
+
+.ai-layout {
+  grid-template-columns: 0.95fr 1.05fr;
+}
+
+.ai-upload-card,
+.ai-controls-card {
+  padding: 24px;
+}
+
+.ai-note {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.upload-box {
+  display: grid;
+  place-items: center;
+  min-height: 140px;
+  margin-top: 16px;
+  border: 1px dashed rgba(43, 30, 21, 0.22);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  padding: 20px;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.preview-frame {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  margin-top: 18px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(182, 72, 39, 0.08), rgba(31, 25, 20, 0.08));
+  border: 1px solid rgba(43, 30, 21, 0.08);
+}
+
+.preview-frame img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  display: none;
+}
+
+.preview-frame.has-image img {
+  display: block;
+}
+
+.preview-frame.has-image p {
+  display: none;
+}
+
+.preview-frame p {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.ai-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.ai-form-grid label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.ai-form-grid select {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.ai-result-box {
+  margin-top: 18px;
+  padding: 20px;
+}
+
+.ai-result-box h4,
+.match-card h4 {
+  margin-top: 0;
+}
+
+.compact {
+  margin-top: 22px;
+}
+
+.match-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.match-card {
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.54);
+  border: 1px solid rgba(43, 30, 21, 0.08);
+}
+
+.match-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .section-heading { margin-bottom: 18px; }
 
 .section-heading h2 {
@@ -471,6 +608,11 @@ section { margin-top: 36px; }
   font-size: 1.55rem;
 }
 
+.price-stack {
+  display: grid;
+  gap: 3px;
+}
+
 .product-desc {
   color: var(--muted);
   line-height: 1.7;
@@ -482,11 +624,36 @@ section { margin-top: 36px; }
   justify-content: space-between;
   gap: 14px;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
 .product-price {
   font-size: 1.25rem;
   font-weight: 800;
+}
+
+.price-sub {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.price-old {
+  color: var(--muted);
+  text-decoration: line-through;
+  font-size: 0.88rem;
+}
+
+.discount-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #fff8f1;
+  background: linear-gradient(135deg, #b64827, #7c2d17);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .empty-state {
@@ -685,11 +852,13 @@ section { margin-top: 36px; }
 @media (max-width: 1050px) {
   .hero,
   .showcase-grid,
+  .ai-layout,
   .about-section,
   .checkout-layout,
   .products,
   .testimonial-grid,
-  .editor-grid {
+  .editor-grid,
+  .match-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -702,11 +871,13 @@ section { margin-top: 36px; }
 
   .hero,
   .showcase-grid,
+  .ai-layout,
   .about-section,
   .products,
   .testimonial-grid,
   .checkout-layout,
   .editor-grid,
+  .match-grid,
   .form-grid,
   .site-footer,
   .newsletter {
@@ -721,9 +892,15 @@ section { margin-top: 36px; }
   }
 
   .collection-heading,
-  .collection-controls {
+  .collection-controls,
+  .ai-form-grid {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .ai-form-grid {
+    grid-template-columns: 1fr;
+    display: grid;
   }
 
   .hero-copy,

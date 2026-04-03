@@ -1,12 +1,17 @@
 // Apni products yahin add ya edit karein.
 // Har item me id, name, category, price, tag, desc, aur image dena hai.
+const usdToPkrRate = 279.19;
+
 const products = [
   {
     id: 1,
     name: "Sand Drape Co-Ord",
     category: "Women",
     price: 62,
+    originalPrice: 78,
+    discount: 21,
     tag: "Trending",
+    mood: "Elegant",
     desc: "Soft premium set with elevated tailoring and relaxed silhouette.",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
   },
@@ -15,7 +20,10 @@ const products = [
     name: "Midnight Tailored Set",
     category: "Men",
     price: 84,
+    originalPrice: 99,
+    discount: 15,
     tag: "Formal",
+    mood: "Formal",
     desc: "Sharp evening tailoring with clean lines and modern luxury feel.",
     image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
   },
@@ -24,7 +32,10 @@ const products = [
     name: "Terracotta Street Hoodie",
     category: "Streetwear",
     price: 48,
+    originalPrice: 61,
+    discount: 22,
     tag: "Hot",
+    mood: "Streetwear",
     desc: "Relaxed everyday essential with a bold seasonal color tone.",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80"
   },
@@ -33,7 +44,10 @@ const products = [
     name: "Pearl Linen Abaya",
     category: "Women",
     price: 73,
+    originalPrice: 88,
+    discount: 17,
     tag: "Elegant",
+    mood: "Elegant",
     desc: "Lightweight modest wear with minimal detailing and premium drape.",
     image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80"
   },
@@ -42,7 +56,10 @@ const products = [
     name: "Graphite Overshirt",
     category: "Men",
     price: 58,
+    originalPrice: 69,
+    discount: 16,
     tag: "New",
+    mood: "Casual",
     desc: "Smart casual overshirt designed for layered seasonal outfits.",
     image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80"
   },
@@ -51,7 +68,10 @@ const products = [
     name: "Soft Beige Essential Tee",
     category: "Basics",
     price: 29,
+    originalPrice: 38,
+    discount: 24,
     tag: "Daily Wear",
+    mood: "Casual",
     desc: "Clean-cut staple piece that works with every wardrobe setup.",
     image: "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80"
   }
@@ -71,9 +91,23 @@ const overlay = document.getElementById("overlay");
 const formMessage = document.getElementById("formMessage");
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
+const photoUpload = document.getElementById("photoUpload");
+const uploadedPreview = document.getElementById("uploadedPreview");
+const previewPlaceholder = document.getElementById("previewPlaceholder");
+const previewFrame = document.querySelector(".preview-frame");
+const styleMood = document.getElementById("styleMood");
+const styleFit = document.getElementById("styleFit");
+const styleTone = document.getElementById("styleTone");
+const analyzeStyleButton = document.getElementById("analyzeStyleButton");
+const styleResultText = document.getElementById("styleResultText");
+const matchGrid = document.getElementById("matchGrid");
 
 function money(value) {
   return `$${value}`;
+}
+
+function moneyPkr(value) {
+  return `PKR ${Math.round(value * usdToPkrRate).toLocaleString()}`;
 }
 
 function buildCategoryFilter() {
@@ -123,7 +157,12 @@ function renderProducts() {
             <h3>${product.name}</h3>
             <p class="product-desc">${product.desc}</p>
             <div class="product-footer">
-              <span class="product-price">${money(product.price)}</span>
+              <div class="price-stack">
+                <span class="product-price">${money(product.price)}</span>
+                <span class="price-sub">${moneyPkr(product.price)}</span>
+                <span class="price-old">${money(product.originalPrice)}</span>
+              </div>
+              <span class="discount-pill">${product.discount}% Off</span>
               <button class="primary-btn" type="button" onclick="addToCart(${product.id})">Add to Cart</button>
             </div>
           </div>
@@ -189,7 +228,7 @@ function renderCartItems() {
         <article class="cart-item">
           <div>
             <h4>${item.name}</h4>
-            <p>${item.category} - ${money(item.price)} each</p>
+            <p>${item.category} - ${money(item.price)} / ${moneyPkr(item.price)} each</p>
             <div class="qty-controls">
               <button type="button" onclick="changeQuantity(${item.id}, -1)">-</button>
               <span>${item.quantity}</span>
@@ -211,9 +250,9 @@ function renderCartItems() {
         <article class="checkout-item">
           <div>
             <h4>${item.name}</h4>
-            <p>Qty: ${item.quantity}</p>
+            <p>Qty: ${item.quantity} - ${item.discount}% off</p>
           </div>
-          <strong>${money(item.price * item.quantity)}</strong>
+          <strong>${money(item.price * item.quantity)} / ${moneyPkr(item.price * item.quantity)}</strong>
         </article>
       `
     )
@@ -226,11 +265,53 @@ function updateCartUI() {
   const total = subtotal + 12;
 
   cartCount.textContent = itemCount;
-  cartSubtotal.textContent = money(subtotal);
-  checkoutSubtotal.textContent = money(subtotal);
-  checkoutTotal.textContent = money(total);
+  cartSubtotal.textContent = `${money(subtotal)} / ${moneyPkr(subtotal)}`;
+  checkoutSubtotal.textContent = `${money(subtotal)} / ${moneyPkr(subtotal)}`;
+  checkoutTotal.textContent = `${money(total)} / ${moneyPkr(total)}`;
 
   renderCartItems();
+}
+
+function renderMatchCards(recommendations) {
+  matchGrid.innerHTML = recommendations
+    .map(
+      (item) => `
+        <article class="match-card">
+          <h4>${item.name}</h4>
+          <p>${item.desc}</p>
+          <p><strong>${money(item.price)}</strong> / ${moneyPkr(item.price)}</p>
+          <p>${item.discount}% off for your selected style.</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function analyzeStyleMatch() {
+  const mood = styleMood.value;
+  const fit = styleFit.value;
+  const tone = styleTone.value;
+
+  const preferred = products.filter((product) => product.mood === mood);
+  const recommendations = (preferred.length ? preferred : products).slice(0, 3);
+
+  styleResultText.textContent = `AI style match suggests a ${fit.toLowerCase()} ${mood.toLowerCase()} look with ${tone.toLowerCase()} tones. Yeh outfits aap ke selected vibe ke sath zyada match karte hain.`;
+  renderMatchCards(recommendations);
+}
+
+function handlePhotoUpload(event) {
+  const [file] = event.target.files;
+  if (!file) {
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    uploadedPreview.src = reader.result;
+    previewFrame.classList.add("has-image");
+    previewPlaceholder.textContent = "";
+  };
+  reader.readAsDataURL(file);
 }
 
 function openCart() {
@@ -252,6 +333,8 @@ overlay.addEventListener("click", closeCart);
 
 searchInput.addEventListener("input", renderProducts);
 categoryFilter.addEventListener("change", renderProducts);
+photoUpload.addEventListener("change", handlePhotoUpload);
+analyzeStyleButton.addEventListener("click", analyzeStyleMatch);
 
 document.getElementById("checkoutForm").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -280,4 +363,5 @@ document.getElementById("newsletterForm").addEventListener("submit", (event) => 
 
 buildCategoryFilter();
 renderProducts();
+renderMatchCards(products.slice(0, 3));
 updateCartUI();
